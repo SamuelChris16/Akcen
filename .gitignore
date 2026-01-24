@@ -1,0 +1,48 @@
+# Expo & React Native
+.expo/
+dist/
+web-build/
+
+# Metro Bundler Cache
+.metro-health
+.metro-cache
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Continuous Native Generation (CNG)
+/android/
+/ios/
+
+# Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+
+
+# Build Outputs
+*.apk
+*.aab
+*.ipa
+
+# TypeScript
+*.tsbuildinfo
+
+# OS Files (Windows/WSL Context)
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS (Standard practice for teams)
+.DS_Store
+
+# Editor Config
+.idea/
+.vscode/
+*.swp
+*.swo
