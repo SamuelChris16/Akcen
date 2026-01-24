@@ -28,10 +28,10 @@ export const COLORS = {
   },
   
   // Backgrounds
-  bgHome: '#E9ECF0', 
-  bgBelajar: '#E3F1E1',
-  bgTutor: '#E1EAF5',
-  bgKelas: '#FFF9E3',
+  bgHome: '#E6E6E6', 
+  bgBelajar: '#9CC589',
+  bgTutor: '#5C8BC0',
+  bgKelas: '#FCEFB4',
   
   // Tabs
   tabHome: '#E6E6E6',

@@ -40,7 +40,7 @@ export default function HomePage() {
                 styles.brandColor,
                 { fontSize: responsiveSize('hero'), lineHeight: responsiveLineHeight('hero') }
               ]}>
-                akcen
+                Akcen
               </Text>
               <Text style={[
                 styles.tagline, 

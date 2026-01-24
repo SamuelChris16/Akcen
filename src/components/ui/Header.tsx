@@ -23,7 +23,7 @@ export const Header = () => {
         <View style={styles.tabsContainer}>
           <NavTab label="Home" path="/" color={COLORS.tabHome} isActive={pathname === '/'} />
           <NavTab label="Belajar" path="/belajar" color={COLORS.tabBelajar} isActive={pathname.includes('belajar')} />
-          <NavTab label="Tutor" path="/tutor" color={COLORS.tabTutor} isActive={pathname.includes('tutor')} textColor="#FFF" />
+          <NavTab label="Tutor" path="/tutor" color={COLORS.tabTutor} isActive={pathname.includes('tutor')} />
           <NavTab label="Kelas" path="/kelas" color={COLORS.tabKelas} isActive={pathname.includes('kelas')} />
         </View>
 
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 20,
     zIndex: 10,
+    backgroundColor: 'transparent',
   },
   navBar: {
     flexDirection: 'row',
