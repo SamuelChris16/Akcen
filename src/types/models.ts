@@ -39,3 +39,17 @@ export interface Course {
   price: number;
   coverImage: string;
 }
+
+export interface LessonBlock {
+  id: number;
+  type: 'video' | 'quiz' | 'text' | 'unknown';
+  content: any;
+}
+
+
+export interface LessonDetail {
+  id: number;
+  title: string;
+  description: string;
+  blocks: LessonBlock[];
+}
