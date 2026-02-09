@@ -27,10 +27,6 @@ export const Header = () => {
           <NavTab label="Kelas" path="/kelas" color={COLORS.tabKelas} isActive={pathname.includes('kelas')} />
         </View>
 
-        {/* Login Button */}
-        <TouchableOpacity style={styles.loginButton}>
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );

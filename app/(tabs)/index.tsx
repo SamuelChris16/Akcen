@@ -1,9 +1,12 @@
 import { COLORS, FONTS, SPACING, UI } from '@/constants/theme'; // Adjust path if needed
 import React from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View, Alert } from 'react-native';
+import { useRouter } from 'expo-router'; // 1. Import Router
+import { authApi } from '@/src/api/auth'; // 2. Import Auth API
 
 export default function HomePage() {
   const { width } = useWindowDimensions();
+  const router = useRouter(); // 3. Initialize Router
   const isMobile = width < 768;
 
   // Helper to pick size based on screen width
@@ -13,12 +16,35 @@ export default function HomePage() {
   const responsiveLineHeight = (key: keyof typeof FONTS.lineHeights) => 
     isMobile ? FONTS.lineHeights[key].mobile : FONTS.lineHeights[key].desktop;
 
+
+  const handleLogout = async () => {
+    try {
+      await authApi.logout(); 
+      router.replace('/login'); 
+    } catch (error) {
+      console.error("Logout failed", error);
+      Alert.alert("Error", "Could not log out. Please try again.");
+    }
+  };
+
   return (
     <ScrollView 
       style={styles.container} 
       contentContainerStyle={[styles.scrollContent, { paddingHorizontal: isMobile ? SPACING.m : SPACING.xl }]}
       showsVerticalScrollIndicator={false}
     >
+      
+      <View style={styles.headerRow}>
+        <TouchableOpacity 
+          onPress={handleLogout} 
+          style={styles.logoutButton}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.logoutText}>Logout</Text>
+        </TouchableOpacity>
+      </View>
+
+
       <View style={styles.heroSection}>
         
         {/* --- Left Column: Text --- */}
@@ -91,9 +117,32 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
-    justifyContent: 'center',
+    // justifyContent: 'center', // REMOVED: This forces content to center vertically, better to let it flow from top
     paddingBottom: SPACING.xl,
   },
+  
+  headerRow: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'flex-end', // Pushes button to the right
+    paddingTop: SPACING.m,
+    marginBottom: SPACING.s,
+  },
+  logoutButton: {
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: UI.radius.pill,
+    backgroundColor: '#FFEEF0', // Light red bg
+    borderWidth: 1,
+    borderColor: '#FFD1D1',
+  },
+  logoutText: {
+    color: '#D93025', // Red text
+    fontWeight: FONTS.weights.bold,
+    fontSize: 14,
+  },
+
+  // --- Existing Styles ---
   heroSection: {
     flexDirection: 'row',
     alignItems: 'center',

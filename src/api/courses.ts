@@ -1,24 +1,28 @@
-import { Course, CourseAttributes, StrapiResponse } from '@/src/types/models';
 import { client, BASE_URL } from '@/src/api/client';
+import { Course } from '@/src/types/models'; 
 
-const PLACEHOLDER_IMAGE = 'https://via.placeholder.com/400x200.png?text=No+Image';
+const PLACEHOLDER_IMAGE = 'https://via.placeholder.com/300'; // Or your local asset
 
 export const fetchCourses = async (): Promise<Course[]> => {
   try {
+    const response = await client.get('/courses?populate=*');
 
-    const response = await client.get<StrapiResponse<CourseAttributes>>('/courses?populate=*');
+    const rawData = response.data.data;
     
-    return response.data.data.map((item) => {
-      const attrs = item.attributes;
-      
+    if (!rawData) return [];
+
+    return rawData.map((item: any) => {
+
       return {
         id: item.id,
-        title: attrs.title || 'Untitled Course',
-        description: attrs.description || '',
-        price: attrs.price || 0,
+
+        title: item.course_title || 'Untitled Course',
+        description: item.course_description || '',
+        price: item.course_price || 0,
+        slug: item.course_slug || '',
         
-        coverImage: attrs.coverImage?.data?.attributes?.url 
-          ? `${BASE_URL}${attrs.coverImage.data.attributes.url}`
+        coverImage: item.course_cover?.url 
+          ? `${BASE_URL}${item.course_cover.url}`
           : PLACEHOLDER_IMAGE
       };
     });
