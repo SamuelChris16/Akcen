@@ -39,11 +39,6 @@ async function request<T>(endpoint: string, options: RequestOptions = {}): Promi
   return response.json();
 }
 
-export interface StrapiDocIdx {
-  documentId: string,
-  id: number
-}
-
 export const api = {
   get: <T>(endpoint: string, options?: RequestOptions) => 
     request<T>(endpoint, { ...options, method: 'GET' }),

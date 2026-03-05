@@ -22,9 +22,10 @@ interface SidebarProps {
   activeTab: string;
   onNavigate: (tab: string) => void;
   isMentor?: boolean;
+  onLogout: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen, activeTab, onNavigate, isMentor = false }) => {
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, activeTab, onNavigate, isMentor = false, onLogout }) => {
   
   const studentMenuItems = [
     { id: 'home', icon: Home, label: 'Home' },
@@ -43,7 +44,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, activeTab, onNavigate, isMent
     { id: 'curriculum', icon: CalendarDays, label: 'My Schedule' }, 
     { id: 'messages', icon: MessageSquare, label: 'Mentoring' },
   ];
-
+  
   const menuItems = isMentor ? mentorMenuItems : studentMenuItems;
   
   // Settings is always at bottom
@@ -59,6 +60,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, activeTab, onNavigate, isMent
     );
   });
   const currentTier = RANK_SYSTEM[currentRankIndex] || RANK_SYSTEM[0];
+  
 
   return (
     <div className={`fixed inset-y-0 left-0 z-40 w-72 bg-white text-akcen-text border-r border-akcen-gray transition-transform duration-300 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:inset-0 shadow-2xl lg:shadow-none flex flex-col`}>
@@ -143,7 +145,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, activeTab, onNavigate, isMent
                    {isMentor ? "Physics Lead" : currentTier.title}
                  </p>
               </div>
-              <LogOut size={16} className="text-akcen-muted opacity-0 group-hover:opacity-100 transition-opacity hover:text-red-500" />
+              <LogOut onClick={onLogout} size={16} className="text-akcen-muted opacity-0 group-hover:opacity-100 transition-opacity hover:text-red-500" />
            </div>
         </div>
       </div>
